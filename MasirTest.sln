@@ -50,6 +50,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "JSCode", "http://localhost:
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{072F6C5E-6A2C-4E97-ABF3-C2144151BF62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{7D339C17-2F8A-46A3-92EE-0DC8923D5952}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D339C17-2F8A-46A3-92EE-0DC8923D5952}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{7D339C17-2F8A-46A3-92EE-0DC8923D5952}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{072F6C5E-6A2C-4E97-ABF3-C2144151BF62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{072F6C5E-6A2C-4E97-ABF3-C2144151BF62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{072F6C5E-6A2C-4E97-ABF3-C2144151BF62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{072F6C5E-6A2C-4E97-ABF3-C2144151BF62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
