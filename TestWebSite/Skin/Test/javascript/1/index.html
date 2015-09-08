@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Javascript 面向对象编程（一）：封装</title>
+    <script>
+        function Cat简单封装() {
+            //var Cat = {
+            //    name: '',
+            //    color: ''
+            //};
+
+            //var cat1 = {};//创建一个空对象
+            //cat1.name = '打毛';//按照原型对象的属性赋值
+            //cat1.colo = '黄毛';
+
+            //var cat2 = {};
+            //cat2.name = '儿毛';
+            //cat2.color = '黑猫';
+        };
+
+        function Cat实例对象() {
+            //function Cat(name, color) {
+            //    return {
+            //        name: name,
+            //        color: color
+            //    }
+            //};
+            //var cat1 = Cat('打毛', '黄色');
+            //var cat2 = Cat('儿毛', '黑色');
+        };
+
+        function Cat构造函数() {
+            //function Cat(name, color) {
+            //    this.name = name;
+            //    this.color = color;
+            //};
+            //var cat1 = new Cat('打毛', '黄色');
+            //var cat2 = new Cat('儿毛', '黑色');
+            //true 验证原型对象与实例对象之间的关系
+            //alert(cat1.constructor == Cat);
+            //alert(cat2.constructor == Cat);
+            //alert(cat1 instanceof Cat);
+        };
+
+        function Cat(name, color) {
+            this.name = name;
+            this.color = color;
+            this.type = '猫科动物';
+            this.eat = function () {
+                alert('吃老鼠');
+            };
+        };
+        var cat1 = new Cat('打毛', '黄毛');
+        var cat2 = new Cat('儿毛', '黑色');
+
+        function PageUp() {
+            var iwin = document.getElementById('iframe1').contentWindow;
+            var doc = iwin.document;
+            iwin.scroll(doc.body.scrollHeight,0);
+        }
+        function PageDown() {
+            var iwin = document.getElementById('iframe1').contentWindow;
+            var doc = iwin.document;
+            iwin.scroll(0, doc.body.scrollHeight);
+        }
+    </script>
+</head>
+<body>
+    <iframe id="iframe1" src="http://test.masir.com/javascript/1/frame.html"></iframe>
+    <input type="button" name="name" value="向上" onclick="PageUp()" />
+    <input type="button" name="name" value="向下" onclick="PageDown()" />
+</body>
+</html>

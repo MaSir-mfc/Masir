@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>防止网页被frame</title>
+    <script>
+        function 防止外部frame本页() {
+            //if (window!=top) {//判断当前window对象是否是top对象
+            //    top.location.href = window.location.href;//如果不是，将top对象的网址自动导向签入网页的网址
+            //}
+        }
+        //自己的网站可以使用
+        function 开放自己的网站frame错误写法() {
+            //if (top.location.hostname != window.location.hostname) {
+            //    top.location.href = window.location.href;
+            //}
+        }
+        function 正确的写法() {
+            //try {
+            //    top.location.hostname;//这里会发生异常
+            //if (top.location.hostname != window.location.hostname) {
+            //    top.location.href = window.location.href;
+            //}
+            //} catch (e) {
+            //    top.location.href = window.location.href;
+            //}
+        }
+
+    </script>
+</head>
+<body>
+    我的2html
+    <div style="width:200px;height:11700px;background-color:red"></div>
+    忘记了房间了
+    <div style="width:10px;height:30000px;background-color:black"></div>
+    我有看到你哦
+</body>
+</html>

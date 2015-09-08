@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script>
+        function 全局变量函数调用() {
+            var n = 99;
+            function f1() {
+                alert(n);
+            }
+            f1();//99
+        }
+
+        function 内部变量函数错误调用() {
+            function f1() {
+                var n = 99;
+            }
+            alert(n);
+        }
+
+        function 不带var的变量默认为全局变量() {
+            function f1() {
+                n = 99;
+            }
+            f1();
+            alert(n);//9
+        }
+        
+        function 外部读取局部变量() {
+            function f1() {
+                var n = 99;
+                function f2() {
+                    alert(n);
+                }
+                return f2;
+            }
+            var result = f1();
+            result();//99
+        }
+
+        //闭包的用途（1、读取函数内部的变量；2、让变量的值时钟保持在内存中）
+        
+        function 闭包公式例子() {
+            function f1() {
+                var n = 999;
+                nAdd = function () { n += 1 };
+
+                function f2() {
+                    alert(n);
+                }
+
+                return f2;
+            };
+
+            var result = f1();
+
+            result();//999
+
+            nAdd();
+
+            result();//1000
+        }
+
+        function 变量作用于this应用() {
+            //var name = 'the window';
+            //var obj = {
+            //    name: 'my obj',
+            //    getNameFunc: function () {
+            //        return function () {
+            //            return this.name;
+            //        };
+            //    }
+            //};
+
+            //alert(obj.getNameFunc()());//the window
+
+            var name = 'the window';
+            var obj = {
+                name: 'my obj',
+                getNameFunc: function () {
+                    var that = this;
+                    return function () {
+                        return that.name;
+                    };
+                }
+            };
+
+            alert(obj.getNameFunc()());//my obj
+        };
+
+        function var和this不是一回事() {
+            var w = 100;
+            function f1() {
+                //var w=101;
+                //this.w=102;
+                function f2() {
+                    document.write(this.w);
+                }
+                return f2;
+            }
+            f1()();
+            //输出：100
+            var w = 100;
+            function f1() {
+                var w = 101;
+                //this.w=102;
+                function f2() {
+                    document.write(this.w);
+                }
+                return f2;
+            }
+            f1()();
+            //输出：100
+            var w = 100;
+            function f1() {
+                w = 101;
+                //this.w=102;
+                function f2() {
+                    document.write(this.w);
+                }
+                return f2;
+            }
+            f1()();
+            //输出：101
+            var w = 100;
+            function f1() {
+                //var w=101;
+                this.w = 102;
+                function f2() {
+                    document.write(this.w);
+                }
+                return f2;
+            }
+            f1()();
+            //输出：102
+        }
+        
+
+    </script>
+</head>
+<body>
+    闭包
+</body>
+</html>

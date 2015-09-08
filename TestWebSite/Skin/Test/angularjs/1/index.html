@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html ng-app>
+<head>
+    <title></title>
+    <script src="http://js.masir.com/public/angular-ui/angular.min.js"></script>
+    <script src="/skin/test/angularjs/1/script.js"></script>
+    <!--<script src="/skin/test/angularjs/scenarios.js"></script>-->
+</head>
+<body>
+    <div ng-controller="PhoneListCtrl">
+        <p>**********************列表展示***********************</p>
+        <p>Total number of phones: {{phones.length}}</p>
+        <ul>
+            <li ng-repeat="phone in phones">
+                {{phone.name}}
+                <p>{{phone.snippet}}</p>
+            </li>
+        </ul>
+        <p>世界{{hello}}</p>
+
+        <p>**********************列表搜索***********************</p>
+        <span>我输入的关键字：{{query}}</span>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span2">
+                    <!--Sidebar content-->
+                    Search: <input ng-model="query">
+
+                </div>
+                <div class="span10">
+                    <!--Body content-->
+
+                    <ul class="phones">
+                        <li ng-repeat="phone in phones | filter:query">
+                            {{phone.name}}
+                            <p>{{phone.snippet}}</p>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <p>**********************新的列表搜索***********************</p>
+        Search: <input ng-model="query">
+        Sort by:
+        <select ng-model="orderProp">
+            <option value="name">Alphabetical</option>
+            <option value="age">Newest</option>
+        </select>
+
+
+        <ul class="phones">
+            <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
+                {{phone.name}}
+                <p>{{phone.snippet}}</p>
+            </li>
+        </ul>
+
+    </div>
+
+    <p>**********************创建表格***********************</p>
+    <table>
+        <tr><th>row number</th></tr>
+        <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]"><td>{{i+1}}</td></tr>
+    </table>
+
+
+
+
+
+    <p>**********************表达式运算***********************</p>
+    <div ng-controller="InvoiceCntl">
+        <b>Invoice:</b>
+        <br>
+        <br>
+        <table>
+            <tr><td>Quantity</td><td>Cost</td></tr>
+            <tr>
+                <td><input type="integer" min="0" ng-model="qty" required></td>
+                <td><input type="number" ng-model="cost" required></td>
+            </tr>
+        </table>
+        <hr>
+        <b>Total:</b> {{qty * cost | currency}}
+    </div>
+
+</body>
+</html>
