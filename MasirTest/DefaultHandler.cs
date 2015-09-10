@@ -1,4 +1,5 @@
-﻿using Masir.Web.Htmx;
+﻿using Masir;
+using Masir.Web.Htmx;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,8 @@ namespace MasirTest
     {
        public override void ParsePage()
        {
-           Masir.MaLogHelper.GetLogger("TestLog").Info("测试的日志");
+           this.MaLogInfo(Request.Url.ToString());
+           //Masir.MaLogHelper.GetLogger("TestLog").Info(Request.Url.ToString());
            base.ParsePage();
        }
     }

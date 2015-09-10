@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>this的应用</title>
+    <script>
+        function 纯粹的函数调用() {
+            var x = 1
+            function test() {
+                //this.x = 1;
+                ///alert(this.x);
+            }
+            test();
+            alert(x);
+        };
+
+        function 作为对象方法的调用() {
+            function test() {
+                alert(this.x);
+            };
+            var o = {};
+            o.x = 2;
+            o.m = test;
+            o.m();//2
+        };
+
+        function 作为构造函数的调用() {
+            var x = 3;
+            function test() {
+                this.x = 2;
+            }
+            var o = new test();
+            alert(o.x);//2
+        }
+
+        function apply调用() {
+            var x = 2;
+            function test() {
+                alert(this.x);
+            };
+
+            var o = {};
+            o.x = 3;
+            o.m = test;
+            o.m.apply();//2
+            o.m.apply(0); //3这里提示undefined
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

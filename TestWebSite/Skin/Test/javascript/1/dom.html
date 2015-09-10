@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>用Javascript获取页面元素的位置</title>
+    <script>
+        //获取浏览器的宽高
+        function getViewport() {
+            if (document.compatMode == "BackCompat") {
+                return {
+                    width: document.body.clientWidth,
+                    height: document.body.clientHeight
+                }
+            } else {
+                return {
+                    width: document.documentElement.clientWidth,
+                    height: document.documentElement.clientHeight
+                }
+            }
+        };
+        //获取浏览器宽高的另一种方式
+        function getPagearea() {
+            if (document.compatMode == "BackCompat") {
+                return {
+                    width: document.body.scrollWidth,
+                    height: document.body.scrollHeight
+                }
+            } else {
+                return {
+                    width: document.documentElement.scrollWidth,
+                    height: document.documentElement.scrollHeight
+                }
+            }
+        };
+        //两种方式结合
+        function getPagearea2() {
+            if (document.compatMode == "BackCompat") {
+                return {
+                    width: Math.max(document.body.scrollWidth, document.body.clientWidth),
+                    height: math.max(document.body.scrollHeight, document.body.clientHeight)
+                }
+            } else {
+                return {
+                    width: Math.max(document.documentElement.scrollWidth, document.documentElement.clientWidth),
+                    height: math.max(document.documentElement.scrollHeight, document.documentElement.clientHeight)
+                }
+            }
+        };
+        //获取绝对位置的横坐标和纵坐标（对于表格和iframe中的元素不适用）
+        function getElementLeft() {
+            var element = document.getElementById('ele');
+            var actualLeft = element.offsetLeft;
+            var current = element.offsetParent;
+
+            while (current != null) {
+                actualLeft += current.offsetLeft;
+                current = current.offsetParent;
+            }
+            return actualLeft;
+        };
+        function getEelementTop() {
+            var element = document.getElementById('ele');
+            var actualTop = element.offsetTop;
+            var current = element.offsetParent;
+
+            while (current != null) {
+                actualTop += current.offsetTop;
+                current = current.offsetParent;
+            }
+            return actualTop;
+        }
+        //获取网页元素的相对位置
+        function getElementViewLeft() {
+            var element = document.getElementById('ele');
+            var actualLeft = element.offsetLeft;
+            var current = element.offsetParent;
+
+            while (current != null) {
+                actualLeft += current.offsetLeft;
+                current = current.offsetParent;
+            }
+            var elementScrollLeft = 0;
+            if (document.compatMode == "BackCompat") {
+                elementScrollLeft = document.body.scrollLeft;
+            } else {
+                elementScrollLeft = document.documentElement.scrollLeft;
+            }
+
+            return actualLeft-elementScrollLeft;
+        };
+        function getEelementTop() {
+            var element = document.getElementById('ele');
+            var actualTop = element.offsetTop;
+            var current = element.offsetParent;
+
+            while (current != null) {
+                actualTop += current.offsetTop;
+                current = current.offsetParent;
+            }
+            var elementScrollTop = 0;
+            if (document.compatMode == "BackCompat") {
+                elementScrollTop = document.body.scrollTop;
+            } else {
+                elementScrollTop = document.documentElement.scrollTop;
+            }
+            return actualTop - elementScrollTop;
+        }
+
+        function getElementBounding() {
+            var element = document.getElementById('ele');
+            //相对位置
+            var X = element.getBoundingClientRect().left;//左距离
+            var Y = element.getBoundingClientRect().top;//头部距离
+            
+            //绝对位置
+            X = element.getBoundingClientRect().left + document.documentElement.scrollLeft;
+            Y = element.getBoundingClientRect().top + document.documentElement.scrollTop;
+        }
+
+        var viewPort = getViewport();
+        alert(viewPort.height+'||'+viewPort.width);
+    </script>
+</head>
+<body>
+    用Javascript获取页面元素的位置
+    <input type="text" id="ele" name="name" value="" />
+</body>
+</html>
