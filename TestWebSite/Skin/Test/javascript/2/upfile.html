@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>上传文件测试</title>
+</head>
+<body>
+    <input type="file" id="file" />
+    <input type="button" onclick="SubmitFile()" name="name" value="上传" />
+    <script type="text/javascript">
+        function SubmitFile() {
+            var oMyForm = new FormData();
+            oMyForm.append("username", "Groucho");
+            oMyForm.append("accountnum", 123456); // 数字123456被立即转换成字符串"123456"
+
+            // fileInputElement中已经包含了用户所选择的文件
+            oMyForm.append("userfile", document.getElementById('file').files[0]);
+
+            var oReq = new XMLHttpRequest();
+            oReq.open("POST", "/Txooo/SAAS/SiteBuilder/Account/Ajax/Account.ajax/UpFileTest");
+            oReq.send(oMyForm);
+        }
+        vm.save = function () {
+            var data = new FormData();
+            data.append('a_id', model.a_id);
+            data.append('name', model.name);
+            data.append('sort', model.sort);
+            data.append('file', $('#aaa')[0].files[0]);
+            $.ajax({
+                url: '__URL__/picSave',
+                type: 'POST',
+                data: data,
+                processData: false,  // 告诉jQuery不要去处理发送的数据
+                contentType: false  // 告诉jQuery不要去设置Content-Type请求头
+            }).done(function (ret) {
+                if (ret) {
+                    alert(ret);
+                } else {
+                    alert('保存成功！');
+                    //location = '__URL__';
+                }
+            });
+            return false;
+        };
+    </script>
+</body>
+</html>

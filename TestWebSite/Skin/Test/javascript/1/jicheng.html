@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Javascript面向对象编程（二）：构造函数的继承</title>
+    <script>
+        function 基本函数() {
+            function Animal() {
+                this.species = '动物';
+            }
+            function Cat(name, color) {
+                this.name = name;
+                this.color = color;
+            }
+        };
+
+        function 构造函数绑定() {
+            function Animal() {
+                this.species = '动物';
+            }
+            function Cat(name, color) {
+                Animal.apply(this, arguments);///******
+                this.name = name;
+                this.color = color;
+            }
+            var cat1 = new Cat('大毛', '黄色');
+            alert(cat1.species);
+        };
+
+        function prototype模式() {
+            function Animal() {
+                this.species = '动物';
+            }
+            function Cat(name, color) {
+                this.name = name;
+                this.color = color;
+            }
+
+            Cat.prototype = new Animal();
+            Cat.prototype.constructor = Cat;//将constructor指向Cat防止继承混乱
+            var cat1 = new Cat('大毛', '黄色');
+            alert(cat1.species);
+        }
+        function 直接继承prototype() {
+            function Animal() { };
+            Animal.prototype.species = '动物';
+
+            function Cat(name, color) {
+                this.name = name;
+                this.color = color;
+            }
+
+            Cat.prototype = Animal.prototype;
+            Cat.prototype.constructor = Cat;
+            var cat1 = new Cat('大毛', '黄色');
+            alert(cat1.species);
+        }
+        
+        function 利用空对象作为中介() {
+            function Animal() { };
+            Animal.prototype.species = '动物';
+
+            function Cat(name, color) {
+                this.name = name;
+                this.color = color;
+            }
+            //封装函数
+            function extend(Child, Parent) {
+                var F = function () { };
+                F.prototype = Parent.prototype;
+                Child.prototype = new F();
+                Child.prototype.constructor = Child;
+                Child.uber = Parent.prototype;
+            }
+            extend(Cat, Animal);
+            var cat1 = new Cat("大毛", "黄色");
+            alert(cat1.species);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

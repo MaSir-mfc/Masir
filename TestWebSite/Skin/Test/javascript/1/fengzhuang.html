@@ -53,29 +53,6 @@
         };
         var cat1 = new Cat('打毛', '黄毛');
         var cat2 = new Cat('儿毛', '黑色');
-        ////////////////////////////////////这是一个华丽的分割线///////////////////////////////
-        function 基本函数() {
-            function Animal() {
-                this.species = '动物';
-            }
-            function Cat(name, color) {
-                this.name = name;
-                this.color = color;
-            }
-        };
-
-        function Animal() {
-            this.species = '动物';
-        }
-        function Cat(name, color) {
-            Animal.apply(this,arguments);
-            this.name = name;
-            this.color = color;
-        }
-        var cat1 = new Cat('大毛', '黄色');
-        alert(cat1.species);
-
-
 
 
         //js控制iframe页面（跨域不可用）
