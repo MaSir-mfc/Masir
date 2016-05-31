@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>类库调用例子</title>
+    <script src="/skin/test/javascript/mfc/mfc.js"></script>
+    <script>
+        MFC.addEvent(window, 'load', function (w3cEvent) {
+            //查找文档中所有带popup类的锚标签
+            var popups = MFC.getElementsByClassName('popup', 'a');
+            for (var i = 0; i < popups.length; i++) {
+                //给每个锚添加一个单机事件侦听器
+                MFC.addEvent(popups[i], 'click', function (w3cEvent) {
+                    //使用href属性打开窗口
+                    window.open(this.href);
+                    //取消默认事件
+                    MFC.eventPreventDefault(w3cEvent);
+                });
+            }
+        });
+
+        //位一个窗口添加多个载入事件
+        function sayHello() {
+            alert('Hello');
+        }
+        MFC.addEvent(window, 'load', sayHello);
+        function sayGoodbye() {
+            alert('Goodbye');
+        }
+        MFC.addEvent(window, 'load', sayGoodbye);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

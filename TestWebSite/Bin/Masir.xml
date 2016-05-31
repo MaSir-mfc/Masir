@@ -2433,6 +2433,11 @@
             解析处理类列表
             </summary>
         </member>
+        <member name="T:Masir.Web.Htmx.Redirect301Page">
+            <summary>
+            页面永久重定向
+            </summary>
+        </member>
         <member name="T:Masir.Web.IMaParser">
             <summary>
             页面解签接口
