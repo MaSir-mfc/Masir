@@ -524,13 +524,26 @@
             文件类型
             </summary>
         </member>
+        <member name="T:Masir.Components.JSConvert">
+            <summary>
+            datatable转json
+            </summary>
+        </member>
         <member name="M:Masir.Components.JSConvert.DataTableToJson(System.Data.DataTable,System.String,System.String[])">
-            <summary>   
-            DataTable转成Json    
-            </summary>   
-            <param name="jsonName"></param>   
-            <param name="dt"></param>   
-            <returns></returns>   
+            <summary>
+            DataTable转成Json 
+            </summary>
+            <param name="dt"></param>
+            <param name="jsonName"></param>
+            <param name="encodeFields"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Masir.Components.JSConvert.Dtb2Json(System.Data.DataTable)">
+            <summary>
+            标准的数据转json
+            </summary>
+            <param name="dt"></param>
+            <returns></returns>
         </member>
         <member name="T:Masir.Components.LevenshteinDistance">
             <summary>
@@ -717,6 +730,11 @@
             <param name="url"></param>
             <returns></returns>
         </member>
+        <member name="T:Masir.Components.PagerNavigation">
+            <summary>
+            导航信息
+            </summary>
+        </member>
         <member name="M:Masir.Components.PagerNavigation.GetPageBarCode(System.Int32,System.Int32,System.Int32,System.String,System.String)">
             <summary>
             分页导航函数
@@ -726,6 +744,20 @@
             <param name="currentIndex">当前页索引</param>
             <param name="absolutePath">请求绝对路径</param>
             <param name="urlParam">请求参数集合</param>
+        </member>
+        <member name="M:Masir.Components.PagerNavigation.escape(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Masir.Components.PagerNavigation.IsChinese(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="CString"></param>
+            <returns></returns>
         </member>
         <member name="P:Masir.Components.PagerNavigation.ButtonCount">
             <summary>
@@ -1405,7 +1437,6 @@
             <param name="start">起始记录数</param>
             <param name="limit">终止记录数</param>
             <param name="count">总记录数</param>
-            <param name="">数据表格</param>
         </member>
         <member name="T:Masir.Data.DataEntitySelectAttribute">
             <summary>
@@ -2083,6 +2114,81 @@
             <param name="type"></param>
             <returns></returns>
         </member>
+        <member name="M:Masir.MaLogHelper.MaLogFatal(System.Object,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="messages"></param>
+        </member>
+        <member name="M:Masir.MaLogHelper.MaLogFatal(System.Object,System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="messages"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="M:Masir.MaLogHelper.MaLogError(System.Object,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="messages"></param>
+        </member>
+        <member name="M:Masir.MaLogHelper.MaLogError(System.Object,System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="messages"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="M:Masir.MaLogHelper.MaLogWarn(System.Object,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="messages"></param>
+        </member>
+        <member name="M:Masir.MaLogHelper.MaLogWarn(System.Object,System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="messages"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="M:Masir.MaLogHelper.MaLogInfo(System.Object,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="messages"></param>
+        </member>
+        <member name="M:Masir.MaLogHelper.MaLogInfo(System.Object,System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="messages"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="M:Masir.MaLogHelper.MaLogDebug(System.Object,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="messages"></param>
+        </member>
+        <member name="M:Masir.MaLogHelper.MaLogDebug(System.Object,System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="messages"></param>
+            <param name="ex"></param>
+        </member>
         <member name="T:Masir.Web.Ajax.AjaxFactory">
             <summary>
             异步处理工厂方法
@@ -2149,6 +2255,86 @@
             
             </summary>
             <param name="handler"></param>
+        </member>
+        <member name="T:Masir.Web.Htmx.HtmxFilter">
+            <summary>
+            请求修改
+            </summary>
+        </member>
+        <member name="M:Masir.Web.Htmx.HtmxFilter.#ctor(System.IO.Stream,Masir.Web.Page.MaUrl,Masir.Web.Page.MaPage)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="sink"></param>
+            <param name="url"></param>
+            <param name="page"></param>
+        </member>
+        <member name="M:Masir.Web.Htmx.HtmxFilter.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:Masir.Web.Htmx.HtmxFilter.Flush">
+            <summary>
+            当在派生类中重写时，将清除该流的所有缓冲区，并使得所有缓冲数据被写入到基础设备。
+            </summary>
+        </member>
+        <member name="M:Masir.Web.Htmx.HtmxFilter.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            当在派生类中重写时，从当前流读取字节序列，并将此流中的位置提升读取的字节数。
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Masir.Web.Htmx.HtmxFilter.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+             当在派生类中重写时，设置当前流中的位置。
+            </summary>
+            <param name="offset"></param>
+            <param name="origin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Masir.Web.Htmx.HtmxFilter.SetLength(System.Int64)">
+            <summary>
+            当在派生类中重写时，设置当前流的长度。
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Masir.Web.Htmx.HtmxFilter.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            当在派生类中重写时，向当前流中写入字节序列，并将此流中的当前位置提升写入的字节数。
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+        </member>
+        <member name="P:Masir.Web.Htmx.HtmxFilter.CanRead">
+            <summary>
+            当前流是否支持读取
+            </summary>
+        </member>
+        <member name="P:Masir.Web.Htmx.HtmxFilter.CanSeek">
+            <summary>
+            当前流是否支持查找功能
+            </summary>
+        </member>
+        <member name="P:Masir.Web.Htmx.HtmxFilter.CanWrite">
+            <summary>
+            当前流是否支持写入功能
+            </summary>
+        </member>
+        <member name="P:Masir.Web.Htmx.HtmxFilter.Length">
+            <summary>
+            用字节表示的流长度
+            </summary>
+        </member>
+        <member name="P:Masir.Web.Htmx.HtmxFilter.Position">
+            <summary>
+            获取或设置当前流中的位置
+            </summary>
         </member>
         <member name="T:Masir.Web.Htmx.HtmxHandler">
             <summary>
@@ -2436,6 +2622,21 @@
         <member name="T:Masir.Web.Htmx.Redirect301Page">
             <summary>
             页面永久重定向
+            </summary>
+        </member>
+        <member name="M:Masir.Web.Htmx.Redirect301Page.LoadMainTemplate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Masir.Web.Htmx.RedirectPage">
+            <summary>
+            跳转页面
+            </summary>
+        </member>
+        <member name="M:Masir.Web.Htmx.RedirectPage.LoadMainTemplate">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Masir.Web.IMaParser">
@@ -2836,6 +3037,12 @@
             页面地址构造函数
             </summary>
             <param name="context"></param>
+        </member>
+        <member name="M:Masir.Web.Page.MaUrl.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="P:Masir.Web.Page.MaUrl.Current">
             <summary>
@@ -3346,6 +3553,11 @@
             Cookie 中设置的可选域
             </summary>
         </member>
+        <member name="P:Masir.Web.Security.MaSecurityConfig.CookieUseCurrentRootDomain">
+            <summary>
+            是否使用当前根域
+            </summary>
+        </member>
         <member name="P:Masir.Web.Security.MaSecurityConfig.ValidateIP">
             <summary>
             指定是否验证IP信息
@@ -3472,6 +3684,52 @@
             
             </summary>
             <param name="application"></param>
+        </member>
+        <member name="T:Masir.Web.Security.MaUser">
+            <summary>
+            授权用户信息
+            </summary>
+        </member>
+        <member name="M:Masir.Web.Security.MaUser.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="username"></param>
+        </member>
+        <member name="M:Masir.Web.Security.MaUser.IsInMaRole(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="role"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Masir.Web.Security.MaUser.IsInMaPermission(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="permission"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Masir.Web.Security.MaUser.IsInMaService(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="service"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Masir.Web.Security.MaUser.IsBrowseUrl(Masir.Web.Page.MaUrl)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Masir.Web.Security.MaUser.IsInMaGroup(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="group"></param>
+            <returns></returns>
         </member>
         <member name="T:Masir.Web.Security.MaUserTicket">
             <summary>
