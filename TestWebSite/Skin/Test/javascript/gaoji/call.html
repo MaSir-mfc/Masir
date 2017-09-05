@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>call和apply用法</title>
+    <meta charset="utf-8" />
+    <script language="javascript">
+        function add(a, b) {
+            console.log(a + b);
+        }
+        function sub(a, b) {
+            console.log(a - b);
+        }
+
+        add.call(sub, 3, 1);
+        console.log('-------------------华丽的分割----------------');
+
+        //function Animal(name) {
+        //    this.name = name;
+        //    this.showName = function () {
+        //      console.log(this.name);
+        //    }
+        //}
+
+        //function Cat(name) {
+        //    Animal.call(this, name);
+        //}
+
+        //var cat = new Cat("Black Cat");
+
+        //cat.showName();
+        //console.log(cat instanceof Animal);
+        //console.log('-------------------华丽的分割----------------');
+        //function Animal(name) {
+        //    this.name = name;
+        //    this.showName = function () {
+        //        console.log(this.name);
+        //    }
+        //}
+
+        //function Cat(name) {
+        //    Animal.call(this, name);
+        //}
+
+        //Cat.prototype = new Animal();
+
+        //var cat = new Cat("Black Cat");
+
+        //cat.showName();
+
+        //console.log(cat instanceof Animal);
+        //console.log('-------------------华丽的分割----------------');
+
+        //function Animal(name) {
+        //    this.name = name;
+        //    this.showName = function () {
+        //        console.log(this.name);
+        //    };
+        //};
+
+        //function Cat(name) {
+        //    this.superClass = Animal;
+        //    this.superClass(name);
+        //    delete superClass;
+        //}
+
+        //var cat = new Cat("Black Cat");
+
+        //cat.showName();
+    </script>
+</head>
+<body>
+    测
+</body>
+</html>
