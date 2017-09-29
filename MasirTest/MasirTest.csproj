@@ -36,6 +36,10 @@
     <Reference Include="MasirOpen">
       <HintPath>..\..\Masir\Masir\bin\Debug\MasirOpen.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -46,13 +50,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ajax\Area.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Components\JsonHelper.cs" />
     <Compile Include="DefaultHandler.cs" />
+    <Compile Include="JsonHandler\SetArea.cs" />
     <Compile Include="Parse\CommonParser.cs" />
     <Compile Include="Parse\ParseTools.cs" />
     <Compile Include="Parse\TagDataHelper.cs" />
+    <Compile Include="PathFactory.cs" />
+    <Compile Include="PathHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\Newtonsoft.Json.dll" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
