@@ -16,6 +16,7 @@
  *          1、
 ----------------------------------------------------------------*/
 
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,12 @@ namespace MasirTest.Components
             _token["msg"] = msg;
             _token["data"] = JObject.FromObject(data);
             return _token.ToString();
+        }
+
+        public static string Json(object data)
+        {
+            var _obj = new { errcode = 0, data = data };
+            return JsonConvert.SerializeObject(_obj);
         }
     }
 }

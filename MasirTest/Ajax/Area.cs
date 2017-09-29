@@ -16,6 +16,7 @@
  *          1、
 ----------------------------------------------------------------*/
 
+using Masir;
 using MasirTest.Components;
 using MasirTest.JsonHandler;
 using System;
@@ -33,9 +34,38 @@ namespace MasirTest.Ajax
         {
             Task.Run(() =>
             {
-                new SetArea().SetAreaToData();
+                try
+                {
+                    new SetArea(AreaType.CityArea).SetAreaToData();
+                }
+                catch (Exception ex)
+                {
+                    this.MaLogInfo(string.Format("{0}", ex));
+                }
             });
             return JsonHelper.Json("请求成功", 0);
+        }
+
+        public string SetAreaToData2(HttpContext context)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    new SetArea(AreaType.TownArea).SetAreaToData();
+                }
+                catch (Exception ex)
+                {
+                    this.MaLogInfo(string.Format("{0}", ex));
+                }
+            });
+            return JsonHelper.Json("请求成功", 0);
+        }
+
+        public string GetArea(HttpContext context)
+        {
+            var _dt = new SetArea().GetArea();
+            return JsonHelper.Json(_dt);
         }
     }
 }
