@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,10 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ajax\Area.cs" />
+    <Compile Include="Ajax\AreaInfo.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Components\JsonHelper.cs" />
+    <Compile Include="Components\ListHelper.cs" />
     <Compile Include="DefaultHandler.cs" />
-    <Compile Include="JsonHandler\SetArea.cs" />
+    <Compile Include="Area\SetArea.cs" />
     <Compile Include="Parse\CommonParser.cs" />
     <Compile Include="Parse\ParseTools.cs" />
     <Compile Include="Parse\TagDataHelper.cs" />

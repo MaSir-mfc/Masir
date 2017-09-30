@@ -17,8 +17,8 @@
 ----------------------------------------------------------------*/
 
 using Masir;
+using MasirTest.Area;
 using MasirTest.Components;
-using MasirTest.JsonHandler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,11 +32,14 @@ namespace MasirTest.Ajax
     {
         public string SetAreaToData(HttpContext context)
         {
+            var _form = context.Request.QueryString;
+            AreaType _type;
+            Enum.TryParse(_form["area"].ToUpper(), out _type);
             Task.Run(() =>
             {
                 try
                 {
-                    new SetArea(AreaType.CityArea).SetAreaToData();
+                    new SetArea(_type).SetAreaToData();
                 }
                 catch (Exception ex)
                 {
@@ -48,11 +51,14 @@ namespace MasirTest.Ajax
 
         public string SetAreaToData2(HttpContext context)
         {
+            var _form = context.Request.QueryString;
+            AreaType _type;
+            Enum.TryParse(_form["area"].ToUpper(), out _type);
             Task.Run(() =>
             {
                 try
                 {
-                    new SetArea(AreaType.TownArea).SetAreaToData();
+                    new SetArea(_type).SetAreaToData();
                 }
                 catch (Exception ex)
                 {
@@ -62,9 +68,12 @@ namespace MasirTest.Ajax
             return JsonHelper.Json("请求成功", 0);
         }
 
-        public string GetArea(HttpContext context)
+        public string GetAreaTree(HttpContext context)
         {
-            var _dt = new SetArea().GetArea();
+            var _form = context.Request.QueryString;
+            AreaType _type;
+            Enum.TryParse(_form["area"].ToUpper(), out _type);
+            var _dt = new SetArea(_type).GetAreaTreeList();
             return JsonHelper.Json(_dt);
         }
     }

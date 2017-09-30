@@ -18,6 +18,7 @@
 
 using Masir;
 using Masir.Web.Ajax;
+using MasirTest.Ajax;
 using MasirTest.Components;
 using Newtonsoft.Json.Linq;
 using System;
@@ -31,21 +32,37 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace MasirTest.JsonHandler
+namespace MasirTest.Area
 {
     public class SetArea
     {
         public AreaType AreaType { get; set; }
-        public string Sql
+        public string InsertSql
         {
             get
             {
                 switch (AreaType)
                 {
-                    case AreaType.CityArea:
+                    case AreaType.CITYAREA:
                         return "INSERT INTO [dbo].[area_city] ([area_name] ,[parent_id]) VALUES (@area_name,@parent_id) SELECT @@IDENTITY";
-                    case AreaType.TownArea:
+                    case AreaType.TOWNAREA:
                         return "INSERT INTO [dbo].[area_city_town] ([area_name] ,[parent_id]) VALUES (@area_name,@parent_id) SELECT @@IDENTITY";
+                    default:
+                        break;
+                }
+                return null;
+            }
+        }
+        public string SelectSql
+        {
+            get
+            {
+                switch (AreaType)
+                {
+                    case AreaType.CITYAREA:
+                        return "SELECT [area_id] ,[area_name] ,[parent_id] FROM [dbo].[area_city]";
+                    case AreaType.TOWNAREA:
+                        return "SELECT [area_id] ,[area_name] ,[parent_id] FROM [dbo].[area_city_town]";
                     default:
                         break;
                 }
@@ -87,9 +104,9 @@ namespace MasirTest.JsonHandler
                 DoSqlFor(child["child"], helper, _parentId2);
                 switch (AreaType)
                 {
-                    case AreaType.CityArea:
+                    case AreaType.CITYAREA:
                         break;
-                    case AreaType.TownArea:
+                    case AreaType.TOWNAREA:
                         if (Convert.ToInt32(child["id"]) > 0)
                         {
                             #region 从网页抓取名称并赋值
@@ -133,17 +150,54 @@ namespace MasirTest.JsonHandler
         {
             helper.SpFileValue["@area_name"] = name;
             helper.SpFileValue["@parent_id"] = parentId;
-            return Convert.ToInt32(helper.SqlScalar(Sql, helper.SpFileValue));
+            return Convert.ToInt32(helper.SqlScalar(InsertSql, helper.SpFileValue));
         }
         #endregion
 
         #region 从数据库获得json
+
         public DataTable GetArea()
         {
             using (MaDataHelper helper = MaDataHelper.GetDataHelper("MfcStudent"))
             {
-                string _sql = "SELECT [area_id] ,[area_name] ,[parent_id] FROM [dbo].[area_city_town]";
-                return helper.SqlGetDataTable(_sql);
+                return helper.SqlGetDataTable(SelectSql);
+            }
+        }
+        public IList<AreaInfo> GetAreaList()
+        {
+            return ListHelper<AreaInfo>.DataTableToEntities(GetArea());
+        }
+        private IList<AreaInfo> m_areaList;
+        public AreaInfo GetAreaTreeList()
+        {
+            m_areaList = GetAreaList();
+            return GetAllTreeChild(1);
+        }
+        public AreaInfo GetAllTreeChild(int parentId)
+        {
+            var _parentInfo = m_areaList.Where(a => a.AreaId == parentId).FirstOrDefault();
+            var _childList = m_areaList.Where(a => a.ParentId == parentId);
+            if (_childList.Count() > 0)
+            {
+                _parentInfo.Child = _childList;
+                foreach (var item in _childList)
+                {
+                    GetAllTreeChild(item.AreaId);
+                }
+            }
+            return _parentInfo;
+        }
+
+        public void GetAllChild(int parentId, ref List<AreaInfo> allChildList)
+        {
+            var _childList = m_areaList.Where(a => a.ParentId == parentId);
+            if (_childList.Count() > 0)
+            {
+                allChildList.AddRange(_childList);
+                foreach (var item in _childList)
+                {
+                    GetAllChild(item.AreaId, ref allChildList);
+                }
             }
         }
         #endregion
@@ -174,7 +228,13 @@ namespace MasirTest.JsonHandler
 
     public enum AreaType
     {
-        CityArea = 1,
-        TownArea = 2
+        /// <summary>
+        /// 城市
+        /// </summary>
+        CITYAREA = 1,
+        /// <summary>
+        /// 乡镇
+        /// </summary>
+        TOWNAREA = 2
     }
 }
