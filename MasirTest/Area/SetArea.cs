@@ -47,6 +47,8 @@ namespace MasirTest.Area
                         return "INSERT INTO [dbo].[area_city] ([area_name] ,[parent_id]) VALUES (@area_name,@parent_id) SELECT @@IDENTITY";
                     case AreaType.TOWNAREA:
                         return "INSERT INTO [dbo].[area_city_town] ([area_name] ,[parent_id]) VALUES (@area_name,@parent_id) SELECT @@IDENTITY";
+                    case AreaType.NATIONCITY:
+                        return "INSERT INTO [dbo].[area_nation_city] ([area_name] ,[area_code] ,[parent_id]) VALUES (@area_name,@area_code,@parent_id) SELECT @@IDENTITY";
                     default:
                         break;
                 }
@@ -86,7 +88,7 @@ namespace MasirTest.Area
             return JArray.Parse(_json);
         }
 
-        #region 数据处理
+        #region 入库数据处理
 
         public void SetAreaToData()
         {
@@ -96,6 +98,7 @@ namespace MasirTest.Area
             }
         }
 
+        #region 树形结构处理
         public void DoSqlFor(JToken jtoken, MaDataHelper helper, int parentId)
         {
             foreach (var child in jtoken)
@@ -143,15 +146,60 @@ namespace MasirTest.Area
                 }
             }
         }
+        #endregion
 
-
-
+        #region 入库，并返回id
         public int DoSql(MaDataHelper helper, string name, int parentId)
         {
             helper.SpFileValue["@area_name"] = name;
             helper.SpFileValue["@parent_id"] = parentId;
             return Convert.ToInt32(helper.SqlScalar(InsertSql, helper.SpFileValue));
         }
+        public int DoSql(MaDataHelper helper, string name, string code, int parentId)
+        {
+            helper.SpFileValue["@area_code"] = code;
+            helper.SpFileValue["@area_name"] = name;
+            helper.SpFileValue["@parent_id"] = parentId;
+            return Convert.ToInt32(helper.SqlScalar(InsertSql, helper.SpFileValue));
+        }
+        #endregion
+
+        public void SetAreaCodeToData()
+        {
+            using (MaDataHelper helper = MaDataHelper.GetDataHelper("MfcStudent"))
+            {
+                GetArrayByString(ReadTxtLines(), helper);
+            }
+        }
+
+        public List<GuoJiaCity> ReadTxtLines()
+        {
+            List<GuoJiaCity> _list = new List<GuoJiaCity>();
+            string[] _lines = File.ReadAllLines(string.Format("{0}/App_Data/GUOJIACITY.txt", AppDomain.CurrentDomain.BaseDirectory));
+            for (int i = 0; i < _lines.Length; i++)
+            {
+                var _array = _lines[i].Split('-');
+                _list.Add(new GuoJiaCity { code = _array[0], code1 = _array[0].Substring(0, 2), code2 = _array[0].Substring(2, 2), code3 = _array[0].Substring(4, 2), name = _array[1] });
+            }
+            return _list;
+        }
+
+        public void GetArrayByString(List<GuoJiaCity> linesList, MaDataHelper helper)
+        {
+            foreach (var item in linesList.Where(t => t.code2 == "00" && t.code3 == "00"))
+            {
+                int _parentId2 = DoSql(helper, item.name, item.code, 0);
+                foreach (var item2 in linesList.Where(t => t.code1 == item.code1 && t.code2 != "00" && t.code3 == "00"))
+                {
+                    int _parentId3 = DoSql(helper, item2.name, item2.code, _parentId2);
+                    foreach (var item3 in linesList.Where(t => t.code1 == item2.code1 && t.code2 == item2.code2 && t.code3 != "00"))
+                    {
+                        DoSql(helper, item3.name, item3.code, _parentId3);
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #region 从数据库获得json
@@ -224,8 +272,17 @@ namespace MasirTest.Area
         }
         #endregion
 
-    }
 
+
+    }
+    public class GuoJiaCity
+    {
+        public string code { get; set; }
+        public string code1 { get; set; }
+        public string code2 { get; set; }
+        public string code3 { get; set; }
+        public string name { get; set; }
+    }
     public enum AreaType
     {
         /// <summary>
@@ -235,6 +292,11 @@ namespace MasirTest.Area
         /// <summary>
         /// 乡镇
         /// </summary>
-        TOWNAREA = 2
+        TOWNAREA = 2,
+        /// <summary>
+        /// 国家发布城市
+        /// </summary>
+        NATIONCITY = 3
     }
 }
+

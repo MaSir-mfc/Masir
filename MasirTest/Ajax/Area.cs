@@ -76,5 +76,22 @@ namespace MasirTest.Ajax
             var _dt = new SetArea(_type).GetAreaTreeList();
             return JsonHelper.Json(_dt);
         }
+
+
+        public string SetAreaCodeToData(HttpContext context)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    new SetArea(AreaType.NATIONCITY).SetAreaCodeToData();
+                }
+                catch (Exception ex)
+                {
+                    this.MaLogInfo(string.Format("{0}", ex));
+                }
+            });
+            return JsonHelper.Json("请求成功", 0);
+        }
     }
 }
