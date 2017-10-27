@@ -22,6 +22,8 @@ namespace WindowsFormsApplication1
             textBox1.Clear();
             _count = 0;
             _buyaode = Convert.ToDouble(textBox3.Text);
+            double _daozhang = Convert.ToDouble(price.Text) * Convert.ToDouble(textBox2.Text);
+            label6.Text = (_daozhang - _buyaode).ToString();
             jisuanBeishuDijian(Convert.ToDouble(price.Text) * Convert.ToDouble(textBox2.Text), Convert.ToDouble(beishu.Text));
         }
         int _count = 0;
