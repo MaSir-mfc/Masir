@@ -24,7 +24,8 @@ namespace WindowsFormsApplication1
             _buyaode = Convert.ToDouble(textBox3.Text);
             double _daozhang = Convert.ToDouble(price.Text) * Convert.ToDouble(textBox2.Text);
             label6.Text = (_daozhang - _buyaode).ToString();
-            label9.Text = (Convert.ToDouble(price.Text) * (1 - Convert.ToDouble(textBox2.Text))).ToString();
+            label9.Text = (Convert.ToDouble(price.Text) * (1 - Convert.ToDouble(textBox2.Text))+ _buyaode).ToString();
+            label11.Text = string.Format("{0}",Convert.ToDouble(label6.Text)- Convert.ToDouble(label9.Text) );
             jisuanBeishuDijian(Convert.ToDouble(price.Text), Convert.ToDouble(beishu.Text));
         }
         int _count = 0;
@@ -39,7 +40,7 @@ namespace WindowsFormsApplication1
             }
             else
             {
-                label7.Text = string.Format("{0}年* 或 *{1}月", _count / 365.0, _count / 30.0);
+                label7.Text = string.Format("{0}年 或 {1}月", _count / 365.0, _count / 30.0);
             }
         }
     }
