@@ -14,7 +14,8 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            GetSetCallContextData();
+            new AliSms().sendSms();
+            //GetSetCallContextData();
 
             #region 废弃代码
             //string _url = "/abc/3/df/434/23/ddfe/10/";
