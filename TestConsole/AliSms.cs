@@ -42,7 +42,7 @@ namespace TestConsole
         {
             key = "LTAIbABpFK50GPp8";
             secret = "OvWsC2f0IEJ98ef9TBup8QxyqONH1D";
-            SendSmsResponse reponse = sendSms("13051531513", "买客", "SMS_123795620", "{\"code\":\"323232\"}");
+            SendSmsResponse reponse = sendSms("13051531513,17600671513", "买客", "SMS_123795620", "{\"code\":\"323232\"}");
             Console.Write("短信发送接口返回的结果----------------");
             Console.WriteLine("Code=" + reponse.Code);
             Console.WriteLine("Message=" + reponse.Message);
