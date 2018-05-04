@@ -40,6 +40,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\aliyun-net-sdk-dysmsapi.dll</HintPath>
     </Reference>
+    <Reference Include="Masir, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\Masir.dll</HintPath>
+    </Reference>
+    <Reference Include="MasirOpen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\MasirOpen.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

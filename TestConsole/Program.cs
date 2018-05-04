@@ -14,7 +14,9 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            new AliSms().sendSms();
+
+
+            //new AliSms().sendSms();
             //GetSetCallContextData();
 
             #region 废弃代码
