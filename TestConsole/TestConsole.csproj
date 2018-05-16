@@ -48,6 +48,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Bin\MasirOpen.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -60,14 +64,19 @@
     <Compile Include="AliSms.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sales.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Ma.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Content Include="lib\aliyun-net-sdk-core.dll" />
     <Content Include="lib\aliyun-net-sdk-dysmsapi.dll" />
+    <Content Include="lib\Newtonsoft.Json.dll" />
     <Content Include="lib\sms\aliyun-net-sdk-core.dll" />
     <Content Include="lib\sms\aliyun-net-sdk-sms.dll" />
   </ItemGroup>
