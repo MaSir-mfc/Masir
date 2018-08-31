@@ -18,54 +18,54 @@ namespace TestConsole
         static void Main(string[] args)
         {
             #region 循环注册极光用户
-            Console.WriteLine("输入开始的用户id，回车继续");
-            string _minUserId = Console.ReadLine();
-            Console.WriteLine("输入单次读取用户条数，回车开始读取用户数据");
-            int _pageSize = Convert.ToInt32(Console.ReadLine());
-            //最后一个用户id
-            string _lastUserId = string.Empty;
-            for (int i = 0; i < 10; i++)
-            {
-                var _dt = Sales.GetUserDb(i, _pageSize, _minUserId);
-                Console.WriteLine("本次总读取用户{0}条", _dt.Rows.Count);
-                List<string> _list = new List<string>();
-                for (int j = 0; j < _dt.Rows.Count; j++)
-                {
-                    _list.Add(string.Format("t{0}", _dt.Rows[j]["user_id"]));
-                }
-                if (_dt.Rows.Count > 0)
-                {
-                    _lastUserId = _dt.Rows[_dt.Rows.Count - 1]["user_id"].ToString();
-                }
-                string _uids = string.Join(",", _list);
-                Console.WriteLine("开始注册极光：{0}", _uids);
-                try
-                {
-                    string _url = string.Format("http://0.t.93390.cn/Serve/Passport/RegistJPush?uids={0}", _uids);
-                    var _result = Encoding.Default.GetString(new WebClient().DownloadData(_url));
-                    var _return = JObject.Parse(_result);
-                    if (Convert.ToBoolean(_return["success"]))
-                    {
-                        Console.WriteLine("服务器注册极光异常：{0}", _uids);
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("注册极光成功");
-                    }
-                }
-                catch (Exception ex2)
-                {
-                    Console.WriteLine("注册极光异常：{0}", ex2.Message);
-                    break;
-                }
-            }
-            Console.WriteLine("本次大于【{0}】的用户注册极光结束，最后一个用户id【{1}】", _minUserId, _lastUserId);
+            //Console.WriteLine("输入开始的用户id，回车继续");
+            //string _minUserId = Console.ReadLine();
+            //Console.WriteLine("输入单次读取用户条数，回车开始读取用户数据");
+            //int _pageSize = Convert.ToInt32(Console.ReadLine());
+            ////最后一个用户id
+            //string _lastUserId = string.Empty;
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    var _dt = Sales.GetUserDb(i, _pageSize, _minUserId);
+            //    Console.WriteLine("本次总读取用户{0}条", _dt.Rows.Count);
+            //    List<string> _list = new List<string>();
+            //    for (int j = 0; j < _dt.Rows.Count; j++)
+            //    {
+            //        _list.Add(string.Format("t{0}", _dt.Rows[j]["user_id"]));
+            //    }
+            //    if (_dt.Rows.Count > 0)
+            //    {
+            //        _lastUserId = _dt.Rows[_dt.Rows.Count - 1]["user_id"].ToString();
+            //    }
+            //    string _uids = string.Join(",", _list);
+            //    Console.WriteLine("开始注册极光：{0}", _uids);
+            //    try
+            //    {
+            //        string _url = string.Format("http://0.t.93390.cn/Serve/Passport/RegistJPush?uids={0}", _uids);
+            //        var _result = Encoding.Default.GetString(new WebClient().DownloadData(_url));
+            //        var _return = JObject.Parse(_result);
+            //        if (Convert.ToBoolean(_return["success"]))
+            //        {
+            //            Console.WriteLine("服务器注册极光异常：{0}", _uids);
+            //            break;
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("注册极光成功");
+            //        }
+            //    }
+            //    catch (Exception ex2)
+            //    {
+            //        Console.WriteLine("注册极光异常：{0}", ex2.Message);
+            //        break;
+            //    }
+            //}
+            //Console.WriteLine("本次大于【{0}】的用户注册极光结束，最后一个用户id【{1}】", _minUserId, _lastUserId);
 
             #endregion
 
             #region 测试阿里云短信发送
-            //new AliSms().sendSms();
+            new AliSms().sendSms();
             #endregion
 
             //GetSetCallContextData();
